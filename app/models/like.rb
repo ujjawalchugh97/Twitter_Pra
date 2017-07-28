@@ -1,7 +1,7 @@
-class Tweet < ApplicationRecord
+class Like < ApplicationRecord
 	belongs_to :user
-	has_many :likes
- 
+    belongs_to :tweet
+
     validates :tweet_id, presence: true
     validates :user_id, presence: true
 end
