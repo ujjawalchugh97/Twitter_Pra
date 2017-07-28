@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
@@ -11,5 +11,10 @@ class User < ApplicationRecord
   has_many :followers, through: :follower_mappings
   has_many :followees, through: :followee_mappings
 
+	def feed
+  	users = followees.pluck(:id) + [self.id]
+  	feed_tweets = Tweet.includes(:user, :likes).where("user_id in (?)",users)
+  	feed_tweets
+ 	end
 
 end
