@@ -17,15 +17,19 @@
   	<% end %>
 
  <header>
-   
+
+  <div class="actions">
+    <a href="/">HOME</a>
+  </div>
+
    <div>
      <% if user_signed_in? %>
-     <div>
+     <div id = "userDetails">
         <%= link_to 'All Users', {controller: "home", action: "users"}%>
         <%= link_to 'Followers', {controller: "home", action: "followers"}%>
         <%= link_to 'Following', {controller: "home", action: "followees"}%>
       </div>
-      <div>
+      <div id = "userDetails">
         <%= link_to 'logout', destroy_user_session_path, method: :delete %>
  
         <%= current_user.email %>
@@ -33,6 +37,12 @@
      <% end %>
    </div>
  </header>
-    <%= yield %>
+
+  <section id="mainSection">
+    <aside id="mainAside"></aside>
+    <main id="mainMain"><%= yield %></main>
+  </section>
+
+  <footer></footer>
   </body>
 </html>
