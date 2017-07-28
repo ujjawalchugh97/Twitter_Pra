@@ -3,6 +3,11 @@ class HomeController < ApplicationController
   
     def index
    		@tweets = current_user.feed
+      search = params[:search]
+      if search
+       query = "content like '%#{search}%' "
+       @tweets = @tweets.where(query)
+      end
     end
   
     def create_tweet
